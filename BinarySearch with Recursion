@@ -1,50 +1,40 @@
 import java.util.Scanner;
-class BinarySearchWithRecursion
-{
-    public static int binarySearch(int[] arr, int lb, int ub, int no)
-    {
-      if (lb<ub)
-      {
-            return -1; }
-      int mid = (lb + ub) / 2;
-      if (no == arr[mid])
-      {
-            return mid;
+
+public class BSWithRecursion {
+    public static int binarySearch(int[] arr, int lb, int ub, int target) {
+        if (lb <= ub) {
+            int mid = (lb + ub) / 2;
+            if (target == arr[mid]) {
+                return mid;
+            } else if (target < arr[mid]) {
+                return binarySearch(arr, lb, mid - 1, target);
+            } else {
+                return binarySearch(arr, mid + 1, ub, target);
+            }
         }
-      else if (no < arr[mid])
-      {
-            return binarySearch(arr, lb, mid - 1, no);
-        }
-      else
-      {
-            return binarySearch(arr, mid + 1, ub , no);
-        }
+        return -1;
     }
- 
-    public static void main(String[] args)
-    {
-      
-      Scanner sc = new Scanner(System.in);
-      System.out.print("Enter the value of arr size ");
-      int n = sc.nextInt();
-      int[] arr = new int[n];
-      System.out.println("enter array value");
-      for(int i=0; i<n; i++)  
-        {  
-            arr[i]=sc.nextInt();  
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the value of array size: ");
+        int n = scanner.nextInt();
+        int[] arr = new int[n];
+        System.out.println("Enter array values:");
+        for (int i = 0; i < n; i++) {
+            arr[i] = scanner.nextInt();
         }
-      System.out.print("Enter the target value: ");
-      int   number = sc.nextInt();
-      int lb= 0;
-      int ub = arr.length - 1;
- 
-      int index = binarySearch(arr, lb, ub, number);
- 
-      if (index != -1){
-          System.out.println("Element found at index " + index);
-        }
-      else{
-          System.out.println("Element not found in the array");
+        System.out.print("Enter the target value: ");
+        int target = scanner.nextInt();
+        int lb = 0;
+        int ub = arr.length - 1;
+
+        int result = binarySearch(arr, lb, ub, target);
+
+        if (result != -1) {
+            System.out.println("Element found at index " + result);
+        } else {
+            System.out.println("Element not found in the array");
         }
     }
 }
